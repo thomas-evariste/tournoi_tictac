@@ -15,14 +15,22 @@ public class Match {
 		int J_actif = 1;
 
 		Boolean[] fin = { false, false };
-
+		
+		int compt = 1;
+		
 		while (!fini) {
+			
+			if(compt == 82){
+				return 0;
+			}
+			
 			entre.clear();
 			case_pos(t, entre, pre);
 			entre.push(pre[1]);
 			entre.push(pre[0]);
 
-			System.err.println("Stack: " + entre);
+			//System.err.println("Stack: " + entre);
+			//System.err.println("compt: " + compt);
 
 			if (J_actif == 1) {
 				pre = J1.play(entre);
@@ -31,13 +39,15 @@ public class Match {
 			}
 			fin = update_case(t, pre, J_actif);
 
-			System.out.println("le joueur " + J_actif + " a joué en " + pre[0] + " : " + pre[1]);
+			//System.out.println("le joueur " + J_actif + " a joué en " + pre[0] + " : " + pre[1]);
 
 			fini = fin[0];
 			J_actif = (J_actif + 1);
 			if (J_actif > 2) {
 				J_actif = 1;
 			}
+			
+			compt++;
 		}
 
 		if (fin[1]) {
@@ -110,8 +120,8 @@ public class Match {
 		if (cas.getpos() != 0 || part.getpos() != 0) {
 			fin[0] = true;
 			fin[1] = true;
-			System.out.println("le joueur " + J_actif + " a fait une erreur");
-			System.err.println(cas.getpos() + " : " + part.getpos());
+			//System.out.println("le joueur " + J_actif + " a fait une erreur");
+			//System.err.println(cas.getpos() + " : " + part.getpos());
 			return fin;
 		}
 

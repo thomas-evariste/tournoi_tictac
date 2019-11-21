@@ -10,4 +10,7 @@ public class IA {
 		
 		
 	}
+    public void reset(){
+    	
+    }
 }

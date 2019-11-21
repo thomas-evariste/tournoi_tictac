@@ -7,8 +7,8 @@ import java.util.*;
  **/
 class Ia_simple extends IA{
 
-	public static Table table;
-	public static Tools tools;
+	public Table table;
+	public Tools tools;
 
     Ia_simple() {
     	
@@ -26,13 +26,30 @@ class Ia_simple extends IA{
         table = new Table(parts);
         
     }
+    
+    public void reset(){
+    	
+        tools = new Tools();
+        ArrayList<Part> parts = new ArrayList<Part>();
+        
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                Part part = new Part(i,j);
+                parts.add(part);
+            }
+        }
+        
+        
+        table = new Table(parts);
+    	
+    }
 
 
     public int[] play(Stack<Integer> entre) {
     
         int opponentRow = entre.pop();
         int opponentCol = entre.pop();
-        System.err.println(opponentRow+" : "+opponentCol);
+        //System.err.println(opponentRow+" : "+opponentCol);
             
         table.getPart(opponentRow/3,opponentCol/3).getCase(opponentRow,opponentCol).setpos(-1);
         tools.deacreseQuality(opponentRow,opponentCol,table);
@@ -67,9 +84,11 @@ class Ia_simple extends IA{
             
         if(x==-1){
             ArrayList<Case> poss = part.getposs();
-           
+            //System.err.println("taille :"+poss.size());
             poss = tools.getpossPos(poss);
+            //System.err.println("taille :"+poss.size());
             poss = tools.getpossBestQuality(poss);
+            //System.err.println("taille :"+poss.size());
             Case posAlea = tools.getposRand(poss);
            
             //System.err.println(posAlea.getquality());
@@ -98,7 +117,7 @@ class Tools{
     
     ArrayList<Case> getpossBestQuality(ArrayList<Case> poss) {
         ArrayList<Case> newPoss = new ArrayList<Case>();
-        int quality = 0;
+        int quality = -100000;
         for(Case pos : poss){
             if (quality == pos.getquality()) {
                 newPoss.add(pos);
@@ -108,6 +127,7 @@ class Tools{
                 newPoss.add(pos);
                 quality = pos.getquality();
             }
+            //System.err.println("quality: "+quality+" pos.getquality(): "+pos.getquality());
         }
         return newPoss;
     }
@@ -115,6 +135,7 @@ class Tools{
     ArrayList<Case> getpossPos(ArrayList<Case> poss){
         ArrayList<Case> newPoss = new ArrayList<Case>();
         for(Case pos : poss){
+        	//System.err.println("x:"+pos.getx()+" y:"+pos.gety()+" p:"+pos.getpos());
             if (pos.getpos() == 0) {
                 newPoss.add(pos);
             }
