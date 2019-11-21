@@ -52,7 +52,7 @@ public class Tournoi {
 		}
 		
 		int compt=0;
-		System.out.println(Joueurs.size());
+		//System.out.println(Joueurs.size());
 		for(int i=0; i<=(2*Joueurs.size());i++){
 			for(int j=0; j<Joueurs.size();j++){
 				int vic = (2*Joueurs.size())-i;

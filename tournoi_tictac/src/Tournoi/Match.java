@@ -20,18 +20,18 @@ public class Match {
 		
 		while (!fini) {
 			
-			if(compt == 82){
-				return 0;
-			}
 			
 			entre.clear();
 			case_pos(t, entre, pre);
+			if(entre.peek()==0){
+				return 0;
+			}
 			entre.push(pre[1]);
 			entre.push(pre[0]);
 
-			//System.err.println("Stack: " + entre);
-			//System.err.println("compt: " + compt);
-
+			System.err.println("Stack: " + entre);
+			System.err.println("compt: " + compt);
+			
 			if (J_actif == 1) {
 				pre = J1.play(entre);
 			} else {

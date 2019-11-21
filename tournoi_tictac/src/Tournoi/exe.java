@@ -11,20 +11,10 @@ public class exe {
 		tournoi.one_match(J1,J2);
 		
 		ArrayList<IA> Joueurs = new ArrayList<IA>();
-		Joueurs.add(J1);
-		Joueurs.add(J2);
-		Ia_simple J3 = new Ia_simple();
-		Joueurs.add(J3);
-		Ia_simple J4 = new Ia_simple();
-		Joueurs.add(J4);
-		Ia_simple J5 = new Ia_simple();
-		Joueurs.add(J5);
-		Ia_simple J6 = new Ia_simple();
-		Joueurs.add(J6);
-		Ia_simple J7 = new Ia_simple();
-		Joueurs.add(J7);
-		Ia_simple J8 = new Ia_simple();
-		Joueurs.add(J8);
+		for(int i =0; i<20;i++){
+			Ia_simple J = new Ia_simple();
+			Joueurs.add(J);
+		}
 		tournoi.league(Joueurs);
 
 	}
