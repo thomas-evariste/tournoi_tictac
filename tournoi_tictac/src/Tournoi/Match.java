@@ -15,23 +15,22 @@ public class Match {
 		int J_actif = 1;
 
 		Boolean[] fin = { false, false };
-		
+
 		int compt = 1;
-		
+
 		while (!fini) {
-			
-			
+
 			entre.clear();
 			case_pos(t, entre, pre);
-			if(entre.peek()==0){
+			if (entre.peek() == 0) {
 				return 0;
 			}
 			entre.push(pre[1]);
 			entre.push(pre[0]);
 
-			System.err.println("Stack: " + entre);
-			System.err.println("compt: " + compt);
-			
+			//System.err.println("Stack: " + entre);
+			//System.err.println("compt: " + compt);
+
 			if (J_actif == 1) {
 				pre = J1.play(entre);
 			} else {
@@ -39,18 +38,20 @@ public class Match {
 			}
 			fin = update_case(t, pre, J_actif);
 
-			//System.out.println("le joueur " + J_actif + " a joué en " + pre[0] + " : " + pre[1]);
+			// System.out.println("le joueur " + J_actif + " a joué en " +
+			// pre[0] + " : " + pre[1]);
 
 			fini = fin[0];
 			J_actif = (J_actif + 1);
 			if (J_actif > 2) {
 				J_actif = 1;
 			}
-			
+
 			compt++;
 		}
 
 		if (fin[1]) {
+			System.err.println("erreur d'un joueur");
 			return J_actif;
 		} else {
 			J_actif = (J_actif + 1);
@@ -63,7 +64,7 @@ public class Match {
 
 	private void case_pos(Table_match t, Stack<Integer> entre, int[] pre) {
 
-		int compt =0;
+		int compt = 0;
 		if (pre[0] == -1) {
 			ArrayList<Part_match> parts = t.getParts();
 			for (Part_match part2 : parts) {
@@ -77,17 +78,18 @@ public class Match {
 				}
 
 			}
-			
+
 		} else {
 
-			Part_match part = t.getPart(pre[0]%3, pre[1]%3);
+			Part_match part = t.getPart(pre[0] % 3, pre[1] % 3);
 
 			if (part.getpos() == 0) {
 				ArrayList<Case_match> cases = part.getposs();
 				for (Case_match cas : cases) {
+					//System.err.println("la case en "+cas.getx()+" "+cas.gety()+" est à "+cas.getpos());
 					if (cas.getpos() == 0) {
-						entre.push(cas.getx());
 						entre.push(cas.gety());
+						entre.push(cas.getx());
 						compt++;
 					}
 				}
@@ -98,8 +100,8 @@ public class Match {
 						ArrayList<Case_match> cases = part2.getposs();
 						for (Case_match cas : cases) {
 							if (cas.getpos() == 0) {
-								entre.push(cas.getx());
 								entre.push(cas.gety());
+								entre.push(cas.getx());
 								compt++;
 							}
 						}
@@ -120,8 +122,9 @@ public class Match {
 		if (cas.getpos() != 0 || part.getpos() != 0) {
 			fin[0] = true;
 			fin[1] = true;
-			//System.out.println("le joueur " + J_actif + " a fait une erreur");
-			//System.err.println(cas.getpos() + " : " + part.getpos());
+			// System.out.println("le joueur " + J_actif + " a fait une
+			// erreur");
+			// System.err.println(cas.getpos() + " : " + part.getpos());
 			return fin;
 		}
 
@@ -130,6 +133,8 @@ public class Match {
 			possession = -1;
 		}
 		cas.setpos(possession);
+		//System.err.println("la case en "+pre[0]+" "+pre[1]+" est à "+cas.getpos());
+		//System.err.println("la case en "+cas.getx()+" "+cas.gety()+" est à "+cas.getpos());
 
 		part.update_pos();
 		if (part.getpos() != 0) {
@@ -263,15 +268,7 @@ class Part_match {
 			int s = 0;
 			for (int[] position : alligne) {
 				s += this.getCase(position[0] + 3 * this.x, position[1] + 3 * this.y).getpos();
-				// System.err.print(position[0]+3*this.x);
-				// System.err.print(":");
-				// System.err.print(position[1]+3*this.y);
-				// System.err.print(":");
-				// System.err.print(this.getCase(position[0]+3*this.x,
-				// position[1]+3*this.y).getpos());
-				// System.err.print(" ");
 			}
-			// System.err.println(" s="+s);
 			if (s == 3) {
 				this.possession = 1;
 				break;

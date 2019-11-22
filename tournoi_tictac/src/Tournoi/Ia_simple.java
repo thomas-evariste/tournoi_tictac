@@ -84,11 +84,11 @@ class Ia_simple extends IA{
             
         if(x==-1){
             ArrayList<Case> poss = part.getposs();
-            System.err.println("taille :"+poss.size());
+            //System.err.println("taille :"+poss.size());
             poss = tools.getpossPos(poss);
-            System.err.println("taille :"+poss.size());
+            //System.err.println("taille :"+poss.size());
             poss = tools.getpossBestQuality(poss);
-            System.err.println("taille :"+poss.size());
+            //System.err.println("taille :"+poss.size());
             Case posAlea = tools.getposRand(poss);
            
             //System.err.println(posAlea.getquality());
@@ -127,7 +127,7 @@ class Tools{
                 newPoss.add(pos);
                 quality = pos.getquality();
             }
-            System.err.println("quality: "+quality+" pos.getquality(): "+pos.getquality());
+            //System.err.println("quality: "+quality+" pos.getquality(): "+pos.getquality());
         }
         return newPoss;
     }
@@ -135,7 +135,7 @@ class Tools{
     ArrayList<Case> getpossPos(ArrayList<Case> poss){
         ArrayList<Case> newPoss = new ArrayList<Case>();
         for(Case pos : poss){
-        	System.err.println("x:"+pos.getx()+" y:"+pos.gety()+" p:"+pos.getpos());
+        	//System.err.println("x:"+pos.getx()+" y:"+pos.gety()+" p:"+pos.getpos());
             if (pos.getpos() == 0) {
                 newPoss.add(pos);
             }
