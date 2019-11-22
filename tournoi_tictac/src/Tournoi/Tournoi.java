@@ -14,7 +14,7 @@ public class Tournoi {
 		return victoir;
 	}
 	
-	public void league(ArrayList<IA> Joueurs){
+	public int[][] league(ArrayList<IA> Joueurs){
 		Match match = new Match();
 		int[] scores = new int[Joueurs.size()];
 
@@ -26,11 +26,11 @@ public class Tournoi {
 				Joueurs.get(i).reset();
 				if(victoir==1){
 					scores[i] +=1;
-					System.out.println("victoir du joueur "+i+" face au joueur "+j);
+					//System.out.println("victoir du joueur "+i+" face au joueur "+j);
 				}
 				else if(victoir==2){
 					scores[j] +=1;
-					System.out.println("victoir du joueur "+j+" face au joueur "+i);
+					//System.out.println("victoir du joueur "+j+" face au joueur "+i);
 				}
 			}
 		}
@@ -42,27 +42,33 @@ public class Tournoi {
 				Joueurs.get(i).reset();
 				if(victoir==1){
 					scores[j] +=1;
-					System.out.println("victoir du joueur "+j+" face au joueur "+i);
+					//System.out.println("victoir du joueur "+j+" face au joueur "+i);
 				}
 				else if(victoir==2){
 					scores[i] +=1;
-					System.out.println("victoir du joueur "+i+" face au joueur "+j);
+					//System.out.println("victoir du joueur "+i+" face au joueur "+j);
 				}
 			}
 		}
 		
+		int[][] resultats = new int[Joueurs.size()][2];
 		int compt=0;
 		//System.out.println(Joueurs.size());
 		for(int i=0; i<=(2*Joueurs.size());i++){
 			for(int j=0; j<Joueurs.size();j++){
-				int vic = (2*Joueurs.size())-i;
-				if(scores[j]==vic){
+				int nb_vic = (2*Joueurs.size())-i;
+				if(scores[j]==nb_vic){
+					resultats[compt][0]=j;
+					resultats[compt][1]=nb_vic;
 					compt++;
-					System.out.println("le joueur "+j+" a fini "+compt+" avec "+vic+" victoire");
+					System.out.println("le joueur "+j+" a fini "+compt+" avec "+nb_vic+" victoire");
 				}
 			}
 		}
 		
+		//System.out.println("fin de la ligue");
+		
+		return resultats;
 		
 	}
 

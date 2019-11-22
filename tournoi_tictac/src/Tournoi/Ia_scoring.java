@@ -60,7 +60,7 @@ public class Ia_scoring extends IA {
 			row = entre.pop();
 			col = entre.pop();
 			int score_temp = scoring.calc_score(row, col, table);
-			System.err.println("la case: "+row+" "+col+" a un score de "+score_temp);
+			//System.err.println("la case: " + row + " " + col + " a un score de " + score_temp);
 			if (score_temp > score) {
 				score = score_temp;
 				x = row;
@@ -71,8 +71,8 @@ public class Ia_scoring extends IA {
 		table.getPart(x / 3, y / 3).getCase(x, y).setpos(1);
 		table.getPart(x / 3, y / 3).update_pos();
 		int[] pos_final = { x, y };
-		System.err.println("il a joué :"+opponentRow+" "+opponentCol);
-		System.err.println("je joue :"+x+" "+y);
+		//System.err.println("il a joué :" + opponentRow + " " + opponentCol);
+		//System.err.println("je joue :" + x + " " + y);
 		return pos_final;
 		// System.out.println(x+" "+y);
 	}
