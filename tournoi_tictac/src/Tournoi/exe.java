@@ -11,7 +11,7 @@ public class exe {
 		// tournoi.one_match(J1,J2);
 		//
 		ArrayList<IA> Joueurs = new ArrayList<IA>();
-		for (int i = 0; i < 3; i++) { //0 1 2
+		for (int i = 0; i < 3; i++) { // 0 1 2
 			Ia_simple J = new Ia_simple();
 			Joueurs.add(J);
 		}
@@ -40,17 +40,17 @@ public class exe {
 		// tournoi.one_match(J1, J2);
 		int[] min = { -500, -500, -500, 0, 0, -1000, -1000, -1000 };
 		int[] max = { 500, 500, 500, 1000, 1000, 0, 0, 0 };
-		Algogenetique1_v2 alg = new Algogenetique1_v2(min, max, 2, Joueurs);
+		Algogenetique1_v2 alg = new Algogenetique1_v2(min, max, 10, Joueurs);
 
-		ArrayList<Integer[]> top10 = alg.work(10, 75, 4);
-
-		for (Integer[] j : top10) {
-			System.out.println();
-			System.out.println("les facteur de l'ia sont : ");
-			for (int fac : j) {
-				System.out.print(" " + fac);
-			}
-		}
+		ArrayList<Integer[]> top10 = alg.work(250, 75, 4);
+		
+//
+//		for (Integer[] j : top10) {
+//			System.out.println();
+//			System.out.println("les facteur de l'ia sont : ");
+//			for (int fac : j) {
+//				System.out.print(" " + fac);
+//			}
+//		}
 	}
-
 }

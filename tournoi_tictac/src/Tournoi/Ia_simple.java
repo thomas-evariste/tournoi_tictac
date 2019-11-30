@@ -5,12 +5,12 @@ import java.util.*;
  * Auto-generated code below aims at helping you parse
  * the standard input according to the problem statement.
  **/
-class Ia_simple extends IA{
+public class Ia_simple extends IA{
 
 	public Table table;
 	public Tools tools;
 
-    Ia_simple() {
+    public Ia_simple() {
     	
         tools = new Tools();
         ArrayList<Part> parts = new ArrayList<Part>();

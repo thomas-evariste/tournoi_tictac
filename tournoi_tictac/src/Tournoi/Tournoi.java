@@ -9,7 +9,7 @@ public class Tournoi {
 		Match match = new Match();
 		int victoir = match.play(J1,J2);
 		
-		System.out.println("victoir du joueur "+victoir);
+		//System.out.println("victoir du joueur "+victoir);
 		
 		return victoir;
 	}
