@@ -15,10 +15,11 @@ public class Match {
 		int J_actif = 1;
 
 		Boolean[] fin = { false, false };
-
-		int compt = 1;
+		
+		//System.out.println("////////////////////////////////////////////////////////////////");
 
 		while (!fini) {
+			
 
 			entre.clear();
 			case_pos(t, entre, pre);
@@ -29,7 +30,7 @@ public class Match {
 			entre.push(pre[0]);
 
 			//System.err.println("Stack: " + entre);
-			//System.err.println("compt: " + compt);
+			// System.err.println("compt: " + compt);
 
 			if (J_actif == 1) {
 				pre = J1.play(entre);
@@ -38,22 +39,25 @@ public class Match {
 			}
 			fin = update_case(t, pre, J_actif);
 
-			// System.out.println("le joueur " + J_actif + " a joué en " +
-			// pre[0] + " : " + pre[1]);
+			//System.out.println("le joueur " + J_actif + " a joué en " +
+			//pre[0] + " : " + pre[1]);
 
 			fini = fin[0];
 			J_actif = (J_actif + 1);
 			if (J_actif > 2) {
 				J_actif = 1;
 			}
-
-			compt++;
 		}
 
 		if (fin[1]) {
-			System.err.println("erreur d'un joueur");
+			System.err.println("erreur d'un joueur victoir de "+J_actif);
+//			boolean jeu = true;
+//			while(jeu){
+//				
+//			}
 			return J_actif;
 		} else {
+			//System.err.println("pas d'erreur d'un joueur");
 			J_actif = (J_actif + 1);
 			if (J_actif > 2) {
 				J_actif = 1;
@@ -86,7 +90,8 @@ public class Match {
 			if (part.getpos() == 0) {
 				ArrayList<Case_match> cases = part.getposs();
 				for (Case_match cas : cases) {
-					//System.err.println("la case en "+cas.getx()+" "+cas.gety()+" est à "+cas.getpos());
+					// System.err.println("la case en "+cas.getx()+"
+					// "+cas.gety()+" est à "+cas.getpos());
 					if (cas.getpos() == 0) {
 						entre.push(cas.gety());
 						entre.push(cas.getx());
@@ -115,7 +120,11 @@ public class Match {
 
 	private Boolean[] update_case(Table_match t, int[] pre, int J_actif) {
 		Boolean[] fin = { false, false };
-
+		if(pre[0]<0||pre[0]>8||pre[1]<0||pre[1]>8){
+			fin[0] = true;
+			fin[1] = true;
+			return fin;
+		}
 		Part_match part = t.getPart_by_Case(pre[0], pre[1]);
 		Case_match cas = part.getCase(pre[0], pre[1]);
 
@@ -133,8 +142,10 @@ public class Match {
 			possession = -1;
 		}
 		cas.setpos(possession);
-		//System.err.println("la case en "+pre[0]+" "+pre[1]+" est à "+cas.getpos());
-		//System.err.println("la case en "+cas.getx()+" "+cas.gety()+" est à "+cas.getpos());
+		// System.err.println("la case en "+pre[0]+" "+pre[1]+" est à
+		// "+cas.getpos());
+		// System.err.println("la case en "+cas.getx()+" "+cas.gety()+" est à
+		// "+cas.getpos());
 
 		part.update_pos();
 		if (part.getpos() != 0) {

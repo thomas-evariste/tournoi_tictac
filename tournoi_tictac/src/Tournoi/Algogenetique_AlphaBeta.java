@@ -1,34 +1,24 @@
 package Tournoi;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Algogenetique1_v2 {
-	// gestion de 30*x ia (8 int)
-	//
-	// séléction init:
-	// -5*x aléatoire
-	// -15*x hasard dans la génération précédente
-	// -10*x meilleur de la génération précédente
-	//
-	// selection final:
-	// -4*x meilleur
-	// -26*30 aléa dans séléction init qui se reproduise
-	//
-	// reproduction:
-	// -croisement
-	// -possibilité de mutation
+public class Algogenetique_AlphaBeta {
 
 	ArrayList<Integer[]> IAs;
-	int[] min = new int[8];
-	int[] max = new int[8];
+	int[] min;
+	int[] max;
 	Random random;
 	ArrayList<IA> Joueurs_test;
 	int nb_Joueurs_test;
 	int x_nb_ia_30;
 	Tournoi tournoi;
 
-	Algogenetique1_v2(int[] min, int[] max, int x_nb_ia_30, ArrayList<IA> Joueurs_test) {
+	public Algogenetique_AlphaBeta(int[] min, int[] max, int x_nb_ia_30, ArrayList<IA> Joueurs_test) {
 		this.min = min;
 		this.max = max;
 		this.x_nb_ia_30 = x_nb_ia_30;
@@ -42,7 +32,8 @@ public class Algogenetique1_v2 {
 		tournoi = new Tournoi();
 	}
 
-	Algogenetique1_v2(int[] min, int[] max, int x_nb_ia_30, ArrayList<IA> Joueurs_test, ArrayList<Integer[]> IAs) {
+	public Algogenetique_AlphaBeta(int[] min, int[] max, int x_nb_ia_30, ArrayList<IA> Joueurs_test,
+			ArrayList<Integer[]> IAs) {
 		this.min = min;
 		this.max = max;
 		this.x_nb_ia_30 = x_nb_ia_30;
@@ -53,7 +44,7 @@ public class Algogenetique1_v2 {
 		tournoi = new Tournoi();
 	}
 
-	ArrayList<Integer[]> work(int nbIte, int prob_mutation, int nb_max_mutation) {
+	public ArrayList<Integer[]> work(int nbIte, int prob_mutation, int nb_max_mutation) throws IOException {
 
 		for (int i = 0; i < nbIte - 1; i++) {
 
@@ -61,8 +52,8 @@ public class Algogenetique1_v2 {
 
 			ArrayList<IA> Joueurs = new ArrayList<IA>();
 			for (int j = 0; j < 30 * x_nb_ia_30; j++) {
-				Ia_scoring J = new Ia_scoring(IAs.get(j)[0], IAs.get(j)[1], IAs.get(j)[2], IAs.get(j)[3], IAs.get(j)[4],
-						IAs.get(j)[5], IAs.get(j)[6], IAs.get(j)[7]);
+				Ia_Alpha_Beta_Modulable J = new Ia_Alpha_Beta_Modulable(IAs.get(j)[0], IAs.get(j)[1], IAs.get(j)[2],
+						IAs.get(j)[3], IAs.get(j)[4], IAs.get(j)[5], IAs.get(j)[6], IAs.get(j)[7], IAs.get(j)[8]);
 				Joueurs.add(J);
 			}
 
@@ -77,8 +68,8 @@ public class Algogenetique1_v2 {
 
 		ArrayList<IA> Joueurs = new ArrayList<IA>();
 		for (int j = 0; j < 30 * x_nb_ia_30; j++) {
-			Ia_scoring J = new Ia_scoring(IAs.get(j)[0], IAs.get(j)[1], IAs.get(j)[2], IAs.get(j)[3], IAs.get(j)[4],
-					IAs.get(j)[5], IAs.get(j)[6], IAs.get(j)[7]);
+			Ia_Alpha_Beta_Modulable J = new Ia_Alpha_Beta_Modulable(IAs.get(j)[0], IAs.get(j)[1], IAs.get(j)[2],
+					IAs.get(j)[3], IAs.get(j)[4], IAs.get(j)[5], IAs.get(j)[6], IAs.get(j)[7], IAs.get(j)[8]);
 			Joueurs.add(J);
 		}
 
@@ -87,6 +78,11 @@ public class Algogenetique1_v2 {
 		int compt = 0;
 
 		ArrayList<Integer[]> top10 = new ArrayList<Integer[]>();
+		BufferedWriter bw = new BufferedWriter(new FileWriter("resultats5.txt"));
+		PrintWriter pWriter = new PrintWriter(bw);
+		int nbIA = 30 * x_nb_ia_30;
+		pWriter.println("résultats pour " + nbIte + " itération, " + nbIA + " IA, une probabilité de " + prob_mutation
+				+ "% de muté et " + nb_max_mutation + " mutaition maximum sur la même ia :");
 
 		for (int[] joueur : resu) {
 			compt++;
@@ -95,11 +91,15 @@ public class Algogenetique1_v2 {
 
 			}
 			System.out.print(" le " + joueur[0] + " a gagné " + joueur[1] + " partie et a comme caract");
-			for (int i = 0; i < 8; i++) {
+			pWriter.print(" le " + joueur[0] + " a gagné " + joueur[1] + " partie et a comme caract");
+			for (int i = 0; i < 9; i++) {
 				System.out.print(" " + IAs.get(joueur[0])[i]);
+				pWriter.print(" " + IAs.get(joueur[0])[i]);
 			}
 			System.out.println(";");
+			pWriter.println(";");
 		}
+		pWriter.close();
 
 		return top10;
 	}
@@ -109,6 +109,7 @@ public class Algogenetique1_v2 {
 		int[][] resu = new int[joueurs.size()][2];
 
 		for (int i = 0; i < joueurs.size(); i++) {
+			System.err.println("cc " + i);
 			resu_int[i][0] = i;
 			resu_int[i][1] = 0;
 			for (IA joueur_test : Joueurs_test) {
@@ -143,8 +144,8 @@ public class Algogenetique1_v2 {
 	}
 
 	Integer[] new_IA_alea() {
-		Integer[] new_IA = new Integer[8];
-		for (int i = 0; i < 8; i++) {
+		Integer[] new_IA = new Integer[9];
+		for (int i = 0; i < 9; i++) {
 			new_IA[i] = random.nextInt(max[i] + 1 - min[i]) + min[i];
 		}
 
@@ -179,7 +180,7 @@ public class Algogenetique1_v2 {
 		ArrayList<Integer[]> IAs_ret = new ArrayList<Integer[]>();
 
 		for (int i = 0; i < 2 * x_nb_ia_30; i++) {
-			IAs_ret.add(IAs_int.get(i  + 25* x_nb_ia_30));
+			IAs_ret.add(IAs_int.get(i + 25* x_nb_ia_30));
 		}
 
 		for (int i = 0; i < 14 * x_nb_ia_30; i++) {
@@ -188,9 +189,9 @@ public class Algogenetique1_v2 {
 			int ran3 = random.nextInt(8);
 			int ran4 = random.nextInt(100);
 			int ran5 = random.nextInt(100);
-			Integer[] IA1 = new Integer[8];
-			Integer[] IA2 = new Integer[8];
-			for (int j = 0; j < 8; j++) {
+			Integer[] IA1 = new Integer[9];
+			Integer[] IA2 = new Integer[9];
+			for (int j = 0; j < 9; j++) {
 				if (j < ran3) {
 					IA1[j] = IAs.get(ran1)[j];
 					IA2[j] = IAs.get(ran2)[j];
@@ -214,7 +215,7 @@ public class Algogenetique1_v2 {
 
 	private void mutation(Integer[] IA, int nb_max_mutation) {
 		for (int i = 0; i < random.nextInt(nb_max_mutation) + 1; i++) {
-			int ran = random.nextInt(8);
+			int ran = random.nextInt(9);
 			IA[ran] = random.nextInt(max[ran] + 1 - min[ran]) + min[ran];
 		}
 	}

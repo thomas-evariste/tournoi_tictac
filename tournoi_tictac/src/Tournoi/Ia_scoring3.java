@@ -8,7 +8,7 @@ public class Ia_scoring3 extends IA {
 	public Table_scoring table;
 	public Scoring scoring;
 
-	Ia_scoring3() {
+	public Ia_scoring3() {
 
 		scoring = new Scoring(248, -493, 248, 198, 84, -166, -897, -701);
 
