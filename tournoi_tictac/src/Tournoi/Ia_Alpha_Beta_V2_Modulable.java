@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class Ia_Alpha_Beta_V2 extends IA {
+public class Ia_Alpha_Beta_V2_Modulable extends IA {
 	int alpha = -100000;
 	int beta = 100000;
 
@@ -24,7 +24,38 @@ public class Ia_Alpha_Beta_V2 extends IA {
 	int col;
 	MinTable_2 newMinTable;
 
-	public Ia_Alpha_Beta_V2() {
+	int var_score_1;
+	int var_score_2;
+	int var_score_3;
+	int var_score_4;
+	int var_score_5;
+	int var_score_6;
+	int var_score_7;
+	int var_score_8;
+	int var_score_9;
+	int var_score_10;
+	int var_score_11;
+	int var_score_12;
+	int var_score_13;
+	int var_score_14;
+	int var_score_15;
+	int var_score_16;
+	int var_score_17;
+	int var_score_18;
+	int var_score_19;
+	int var_score_20;
+	int var_score_21;
+	int var_score_22;
+	int var_score_23;
+	int var_score_24;
+	int var_score_25;
+	int var_score_26;
+	int var_score_27;
+	int var_score_28;
+
+	public Ia_Alpha_Beta_V2_Modulable(int a_1, int a_2, int a_3, int a_4, int a_5, int a_6, int a_7, int a_8, int a_9,
+			int a_10, int a_11, int a_12, int a_13, int a_14, int a_15, int a_16, int a_17, int a_18, int a_19,
+			int a_20, int a_21, int a_22, int a_23, int a_24, int a_25, int a_26, int a_27, int a_28) {
 		randomTable = new ArrayList<int[]>();
 		rand = new Random();
 		turn = 0;
@@ -41,6 +72,35 @@ public class Ia_Alpha_Beta_V2 extends IA {
 		table = new Table_2(minTables);
 		chose = new ArrayList<Square_2>();
 		chosenSquare = new Square_2(-1, -1);
+
+		var_score_1 = a_1;
+		var_score_2 = a_2;
+		var_score_3 = a_3;
+		var_score_4 = a_4;
+		var_score_5 = a_5;
+		var_score_6 = a_6;
+		var_score_7 = a_7;
+		var_score_8 = a_8;
+		var_score_9 = a_9;
+		var_score_10 = a_10;
+		var_score_11 = a_11;
+		var_score_12 = a_12;
+		var_score_13 = a_13;
+		var_score_14 = a_14;
+		var_score_15 = a_15;
+		var_score_16 = a_16;
+		var_score_17 = a_17;
+		var_score_18 = a_18;
+		var_score_19 = a_19;
+		var_score_20 = a_20;
+		var_score_21 = a_21;
+		var_score_22 = a_22;
+		var_score_23 = a_23;
+		var_score_24 = a_24;
+		var_score_25 = a_25;
+		var_score_26 = a_26;
+		var_score_27 = a_27;
+		var_score_28 = a_28;
 	}
 
 	public void reset() {
@@ -108,7 +168,8 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			} else {
 				v = alphaBeta(table, 3, possibleSquare);
 			}
-			//System.err.println("x " + possibleSquare.getx() + " y " + possibleSquare.gety() + " Score " + v);
+			// System.err.println("x " + possibleSquare.getx() + " y " +
+			// possibleSquare.gety() + " Score " + v);
 			if (v > maxScore) {
 				chose.clear();
 				maxScore = v;
@@ -124,7 +185,8 @@ public class Ia_Alpha_Beta_V2 extends IA {
 
 		int ran = rand.nextInt(chose.size());
 
-		//System.out.println(chose.get(ran).getx() + " " + chose.get(ran).gety());
+		// System.out.println(chose.get(ran).getx() + " " +
+		// chose.get(ran).gety());
 		/*
 		 * Square chosenSquare= table.getMinTable(randomTable.get(choice)[0]/3 ,
 		 * randomTable.get(choice)[1]/3).getSquare(randomTable.get(choice)[ 0] ,
@@ -136,9 +198,9 @@ public class Ia_Alpha_Beta_V2 extends IA {
 		// table.updateSquare(chosenSquare, 1);
 
 		turn++;
-		
-		int[] ret ={chose.get(ran).getx(),chose.get(ran).gety()};
-		
+
+		int[] ret = { chose.get(ran).getx(), chose.get(ran).gety() };
+
 		return ret;
 
 	}
@@ -158,11 +220,11 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			if (fin == 1) {
 				formerPlay.setPos(0);
 				table.getMinTable(formerPlay.getx() / 3, formerPlay.gety() / 3).isPossessed();
-				return 70000;
+				return var_score_1;
 			} else if (fin == -1) {
 				formerPlay.setPos(0);
 				table.getMinTable(formerPlay.getx() / 3, formerPlay.gety() / 3).isPossessed();
-				return -70000;
+				return -var_score_2;
 			}
 			for (Square_2 prochainCoup : prochainCoups) {
 				v = Math.min(v, alphaBeta(table, profondeur - 1, prochainCoup));
@@ -188,11 +250,11 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			if (fin == 1) {
 				formerPlay.setPos(0);
 				table.getMinTable(formerPlay.getx() / 3, formerPlay.gety() / 3).isPossessed();
-				return 70000;
+				return var_score_1;
 			} else if (fin == -1) {
 				formerPlay.setPos(0);
 				table.getMinTable(formerPlay.getx() / 3, formerPlay.gety() / 3).isPossessed();
-				return -70000;
+				return -var_score_2;
 			}
 			for (Square_2 prochainCoup : prochainCoups) {
 				v = Math.max(v, alphaBeta(table, profondeur - 1, prochainCoup));
@@ -232,11 +294,11 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			if (fin == 1) {
 				formerPlay.setPos(0);
 				table.getMinTable(formerPlay.getx() / 3, formerPlay.gety() / 3).isPossessed();
-				return 70000;
+				return var_score_1;
 			} else if (fin == -1) {
 				formerPlay.setPos(0);
 				table.getMinTable(formerPlay.getx() / 3, formerPlay.gety() / 3).isPossessed();
-				return -70000;
+				return -var_score_2;
 			}
 			for (Square_2 prochainCoup : prochainCoups) {
 				v = Math.min(v, alphaBetaInv(table, profondeur - 1, prochainCoup));
@@ -262,11 +324,11 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			if (fin == 1) {
 				formerPlay.setPos(0);
 				table.getMinTable(formerPlay.getx() / 3, formerPlay.gety() / 3).isPossessed();
-				return 70000;
+				return var_score_1;
 			} else if (fin == -1) {
 				formerPlay.setPos(0);
 				table.getMinTable(formerPlay.getx() / 3, formerPlay.gety() / 3).isPossessed();
-				return -70000;
+				return -var_score_2;
 			}
 			for (Square_2 prochainCoup : prochainCoups) {
 				v = Math.max(v, alphaBetaInv(table, profondeur - 1, prochainCoup));
@@ -316,11 +378,11 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			if (mintable.getPos() != 0) {
 				// System.err.println("cc1");
 				if (mintable.getx() == 1 && mintable.gety() == 1)
-					score += mintable.getPos() * 500;
+					score += mintable.getPos() * var_score_3;
 				else if (mintable.getx() % 3 == 1 || mintable.gety() % 3 == 1)
-					score += mintable.getPos() * 200;
+					score += mintable.getPos() * var_score_4;
 				else
-					score += mintable.getPos() * 300;
+					score += mintable.getPos() * var_score_5;
 			}
 			// minTable non complétés
 			else {
@@ -340,20 +402,20 @@ public class Ia_Alpha_Beta_V2 extends IA {
 					}
 					if (compt == 2) {
 						// System.err.println("ccbis");
-						score += 10;
+						score += var_score_6;
 					} else if (posi && !neg) {
 						// System.err.println("ccbis");
-						score += 1;
+						score += var_score_7;
 					} else if (compt == -2) {
 						// System.err.println("ccbis2");
-						score -= 15;
+						score -= var_score_8;
 						if (!dangerousMinTables.contains(mintable)) {
 							dangerousMinTables.add(mintable);
 							// System.err.println("coucou");
 						}
 					} else if (!posi && neg) {
 						// System.err.println("ccbis");
-						score -= 1;
+						score -= var_score_9;
 					}
 					compt = 0;
 
@@ -366,7 +428,7 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			if (square.getx() % 3 == dangerousMinTables.get(j).getx()
 					&& (square.gety() % 3 == dangerousMinTables.get(j).gety())) {
 				// System.err.println("cc2");
-				score -= 50;
+				score -= var_score_10;
 			}
 		}
 		// si un joueur a deux macros cases alignés ou non
@@ -377,15 +439,15 @@ public class Ia_Alpha_Beta_V2 extends IA {
 				posCompt += table.getMinTable(pos[0], pos[1]).getPos();
 			}
 			if (posCompt == 2) {
-				score += 700;
+				score += var_score_11;
 			} else if (posCompt == 3) {
-				score += 70000;
-				//System.err.println("cc");
+				score += var_score_12;
+				// System.err.println("cc");
 			} else if (posCompt == -2) {
-				score -= 700;
+				score -= var_score_13;
 			} else if (posCompt == -3) {
-				score -= 70000;
-				//System.err.println("cc");
+				score -= var_score_14;
+				// System.err.println("cc");
 			}
 		}
 
@@ -393,14 +455,14 @@ public class Ia_Alpha_Beta_V2 extends IA {
 		int pos = table.getMinTable(square.getx(), square.gety()).getPos();
 		if (pos == 1 || pos == -1) {
 			// System.err.println("cc5");
-			score -= 75;
+			score -= var_score_15;
 		}
 		square.setPos(0);
 		minTable.isPossessed();
 		return score;
 	}
 
-	static int scoreInv(Table_2 table, Square_2 square) {
+	int scoreInv(Table_2 table, Square_2 square) {
 		Boolean posi = false;
 		Boolean neg = false;
 		int uti = 0;
@@ -427,11 +489,11 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			if (mintable.getPos() != 0) {
 				// System.err.println("cc1");
 				if (mintable.getx() == 1 && mintable.gety() == 1)
-					score += mintable.getPos() * 500;
+					score += mintable.getPos() * var_score_16;
 				else if (mintable.getx() % 3 == 1 || mintable.gety() % 3 == 1)
-					score += mintable.getPos() * 200;
+					score += mintable.getPos() * var_score_17;
 				else
-					score += mintable.getPos() * 300;
+					score += mintable.getPos() * var_score_18;
 			}
 			// minTable non complétés
 			else {
@@ -450,20 +512,20 @@ public class Ia_Alpha_Beta_V2 extends IA {
 					}
 					if (compt == 2) {
 						// System.err.println("ccbis");
-						score += 10;
+						score += var_score_19;
 					} else if (posi && !neg) {
 						// System.err.println("ccbis");
-						score += 1;
+						score += var_score_20;
 					} else if (compt == -2) {
 						// System.err.println("ccbis2");
-						score -= 15;
+						score -= var_score_21;
 						if (!dangerousMinTables.contains(mintable)) {
 							dangerousMinTables.add(mintable);
 							// System.err.println("coucou");
 						}
 					} else if (!posi && neg) {
 						// System.err.println("ccbis");
-						score -= 1;
+						score -= var_score_22;
 					}
 					compt = 0;
 
@@ -476,7 +538,7 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			if (square.getx() % 3 == dangerousMinTables.get(j).getx()
 					&& (square.gety() % 3 == dangerousMinTables.get(j).gety())) {
 				// System.err.println("cc2");
-				score += 50;
+				score += var_score_23;
 			}
 		}
 		// si un joueur a deux macros cases alignés ou non
@@ -487,14 +549,14 @@ public class Ia_Alpha_Beta_V2 extends IA {
 				posCompt += table.getMinTable(pos[0], pos[1]).getPos();
 			}
 			if (posCompt == 2) {
-				score += 700;
+				score += var_score_24;
 			} else if (posCompt == 3) {
-				//System.err.println("cc");
-				score += 70000;
+				// System.err.println("cc");
+				score += var_score_25;
 			} else if (posCompt == -2) {
-				score -= 700;
+				score -= var_score_26;
 			} else if (posCompt == -3) {
-				score -= 70000;
+				score -= var_score_27;
 			}
 		}
 
@@ -502,7 +564,7 @@ public class Ia_Alpha_Beta_V2 extends IA {
 		int pos = table.getMinTable(square.getx(), square.gety()).getPos();
 		if (pos == 1 || pos == -1) {
 			// System.err.println("cc5");
-			score += 75;
+			score += var_score_28;
 		}
 		square.setPos(0);
 		minTable.isPossessed();
@@ -523,170 +585,6 @@ public class Ia_Alpha_Beta_V2 extends IA {
 			}
 		}
 		return 0;
-	}
-
-}
-
-class Square_2 {
-	int x;
-	int y;
-
-	int pos;
-	// 0 personne 1 moi -1 toi
-
-	Square_2(int x, int y) {
-		this.x = x;
-		this.y = y;
-		pos = 0;
-	}
-
-	int getx() {
-		return x;
-	}
-
-	int gety() {
-		return y;
-	}
-
-	int getPos() {
-		return pos;
-	}
-
-	void setPos(int pos) {
-		this.pos = pos;
-	}
-
-}
-
-class MinTable_2 {
-	int[][][] allignes = { { { 0, 0 }, { 0, 1 }, { 0, 2 } }, { { 1, 0 }, { 1, 1 }, { 1, 2 } },
-			{ { 2, 0 }, { 2, 1 }, { 2, 2 } }, { { 0, 0 }, { 1, 0 }, { 2, 0 } }, { { 0, 1 }, { 1, 1 }, { 2, 1 } },
-			{ { 0, 2 }, { 1, 2 }, { 2, 2 } }, { { 0, 0 }, { 1, 1 }, { 2, 2 } }, { { 0, 2 }, { 1, 1 }, { 2, 0 } } };
-
-	int x;
-	int y;
-	ArrayList<Square_2> poss;
-	int pos;
-
-	MinTable_2(int x, int y) {
-		this.x = x;
-		this.y = y;
-
-		poss = new ArrayList<Square_2>();
-
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				Square_2 pos = new Square_2(3 * x + i, 3 * y + j);
-				poss.add(pos);
-			}
-		}
-	}
-
-	ArrayList<Square_2> getPoss() {
-		return poss;
-	}
-
-	Square_2 getSquare(int x, int y) {
-		for (Square_2 pos : poss) {
-			if (x == pos.getx() && y == pos.gety()) {
-				return pos;
-			}
-		}
-		return new Square_2(-1, -1);
-	}
-
-	int getx() {
-		return x;
-	}
-
-	int gety() {
-		return y;
-	}
-
-	int getPos() {
-		return pos;
-	}
-
-	void isPossessed() {
-		int compt = 0;
-		int x_part = this.getx();
-		int y_part = this.gety();
-		Boolean posi = false;
-		for (int[][] alligne : allignes) {
-			for (int[] pos : alligne) {
-				compt += this.getSquare(x_part * 3 + pos[0], y_part * 3 + pos[1]).getPos();
-			}
-			if (compt == 3) {
-				this.setPos(1);
-				posi = true;
-			} else if (compt == -3) {
-				this.setPos(-1);
-				posi = true;
-			}
-			compt = 0;
-		}
-		if (!posi) {
-			this.setPos(0);
-		}
-
-		// System.err.println("REGARDE ICI x " +x_part +" y " + y_part+"
-		// "+this.getPos());
-
-	}
-
-	void setPos(int pos) {
-		this.pos = pos;
-	}
-
-}
-
-class Table_2 {
-
-	ArrayList<MinTable_2> minTables;
-
-	Table_2(ArrayList<MinTable_2> minTables) {
-		this.minTables = minTables;
-	}
-
-	ArrayList<MinTable_2> getMinTables() {
-		return minTables;
-	}
-
-	MinTable_2 getMinTable(int x, int y) {
-		for (MinTable_2 minTable : minTables) {
-			if (x == minTable.getx() && y == minTable.gety()) {
-				return minTable;
-			}
-		}
-		return new MinTable_2(-1, -1);
-	}
-
-	ArrayList<Square_2> next_turn(Square_2 formerPlay, int activePlayer) {
-		ArrayList<Square_2> next_turn = new ArrayList<Square_2>();
-		formerPlay.setPos(activePlayer);
-		MinTable_2 minTable = this.getMinTable(formerPlay.getx() % 3, formerPlay.gety() % 3);
-		if (minTable.getPos() == 0 && formerPlay.getx() != -1) {
-			for (Square_2 square : minTable.getPoss()) {
-				// System.err.println("x: "+square.getx()+" y: "+square.gety()+"
-				// pos: "+square.getPos());
-				if (square.getPos() == 0) {
-					next_turn.add(square);
-				}
-			}
-		} else {
-			for (MinTable_2 macroTable : this.getMinTables()) {
-//				System.err.println(
-//						"x: " + macroTable.getx() + " y: " + macroTable.gety() + " pos: " + macroTable.getPos());
-				if (macroTable.getPos() == 0) {
-					for (Square_2 square : macroTable.getPoss()) {
-						if (square.getPos() == 0) {
-							next_turn.add(square);
-						}
-					}
-				}
-			}
-		}
-		return next_turn;
 	}
 
 }
